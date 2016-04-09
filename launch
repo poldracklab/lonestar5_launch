@@ -25,7 +25,7 @@ parser.add_argument('-q','--queue',help='name of queue',default='normal',dest='q
 parser.add_argument('-m','--email',help='email address for notification',dest='email')
 parser.add_argument('-f','--qsubfile',help='name of qsub file',dest='qsubfile')
 parser.add_argument('-w','--waitproc',help='process to wait for',dest='waitproc')
-parser.add_argument('--ht',help='use hyperthreading',dest='use_hyperthreading', action="store_true",default=True)
+parser.add_argument('--ht',help='use hyperthreading',dest='use_hyperthreading', action="store_true",default=False)
 parser.add_argument('-k','--keepqsubfile',help='keep qsub file',dest='keepqsubfile', action="store_true",default=False)
 parser.add_argument('-u','--ignoreuser',help='ignore ~/.launch_user',dest='ignoreuser', action="store_true",default=False)
 parser.add_argument('-t','--test',help='do not actually launch job',dest='test', action="store_true",default=False)
