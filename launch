@@ -18,7 +18,7 @@ STAMPEDE = 'stampede'
 parser = argparse.ArgumentParser(description='process SLURM job.')
 parser.add_argument('-s','--script',help='name of parallel script to run',dest='script_name')
 parser.add_argument('-r','--runtime',help='maximum runtime for job',default='01:00:00',dest='runtime')
-parser.add_argument('-n','--jobname',help='job name',default='launch',dest='jobname')
+parser.add_argument('-j','--jobname',help='job name',default='launch',dest='jobname')
 parser.add_argument('-A','--projname',help='name of project',dest='projname', default="Analysis_Lonestar")
 parser.add_argument('-d','--cwd',help='name of working directory',dest='directory')
 parser.add_argument('-q','--queue',help='name of queue',default='normal',dest='queue')
