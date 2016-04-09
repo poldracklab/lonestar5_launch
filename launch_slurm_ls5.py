@@ -26,6 +26,13 @@ def launch_slurm_ls5 (serialcmd='', script_name='', runtime='01:00:00',
 
     if max_cores_per_node is None:
         max_cores_per_node = ncores_per_node
+    elif int(max_cores_per_node) > ncores_per_node:
+        print("Requested max cores per node (%s) exceeds available cores per node (%d)." \
+            % (max_cores_per_node, ncores_per_node))
+        if use_hyperthreading is False:
+            print("Enabling hyperthreading (--ht) would double the available cores per node.")
+        sys.exit()
+
     max_cores_per_node = int(max_cores_per_node)
 
     if len(serialcmd)>0:
@@ -54,10 +61,12 @@ def launch_slurm_ls5 (serialcmd='', script_name='', runtime='01:00:00',
                 print('command file contains empty lines - please remove them first')
                 sys.exit()
         if not nodes:
-            nodes = math.ceil(float(ncmds)/float(ncores_per_node))
+            nodes = math.ceil(float(ncmds)/float(max_cores_per_node))
             print('Number of compute nodes not specified - estimating as %d'%nodes)
     
         if int(nodes)>MAXNODES:
+            print('Warning # of nodes exceeds max allowed (%d), reducing requested nodes to %d.' \
+                    % (nodes, MAXNODES))
             nodes=MAXNODES
 
     else:
