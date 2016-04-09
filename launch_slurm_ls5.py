@@ -14,9 +14,10 @@ MAXNODES=171
 
 # set up argument args
 
-
-
-def launch_slurm_ls5 (serialcmd='',script_name='',runtime='01:00:00',jobname='launch',projname='',queue='normal',email=False,qsubfile='',keepqsubfile=False,ignoreuser=False,test=False,parser=[],c=[],verbose=0,hold=[],outfile=[],cwd=[], nodes=0,use_hyperthreading=True):
+def launch_slurm_ls5 (serialcmd='', script_name='', runtime='01:00:00',
+    jobname='launch', projname='', queue='normal', email=False, qsubfile='',
+    keepqsubfile=False, ignoreuser=False, test=False, parser=[], c=[], cores_per_node=48,
+    verbose=0, hold=[], outfile=[], cwd=[], nodes=0, use_hyperthreading=True):
 
     if use_hyperthreading:
         ncores_per_node=48

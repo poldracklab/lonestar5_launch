@@ -32,8 +32,7 @@ parser.add_argument('-t','--test',help='do not actually launch job',dest='test',
 
 parser.add_argument('-i','--hold_jid', help='wait for this job id to complete before launching', dest='hold', default=None)
 parser.add_argument('-N','--nodes', help = 'request that a minimum number of nodes be allocated to this job', dest = 'nodes', default = None)
-
-
+parser.add_argument('-n','--cores-per-node', help='request that a maximum number of cores be used per node (for memorys sake', dest = 'cores_per_node', default = None)
 
 class C(object):
     pass
@@ -54,5 +53,6 @@ hostname = socket.gethostname()
 launch_slurm_ls5(serialcmd=cmd, script_name=args.script_name, runtime=args.runtime,
                 jobname=args.jobname, projname=args.projname, queue=args.queue, email=args.email, qsubfile=args.qsubfile, keepqsubfile=args.keepqsubfile,
                 ignoreuser=args.ignoreuser, test=args.test, parser=parser, c=args, verbose=0,
-                hold=args.hold, outfile=[], cwd=[], nodes=args.nodes, use_hyperthreading=args.use_hyperthreading)
+                hold=args.hold, outfile=[], cwd=[], nodes=args.nodes, cores_per_node=args.cores_per_node,
+                use_hyperthreading=args.use_hyperthreading)
 sys.exit(0)
