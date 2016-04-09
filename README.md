@@ -44,3 +44,9 @@ optional arguments:
                         node (for memorys sake) [ NEW ]
 ```
 
+# defaults
+
+if `-N` is not provided, and `-n` is, the number of nodes will be computed such that all jobs will run simultaenously. Likewise, if `-n` is not provided and `-N` is, the maximum number of cores available will be requested. This is currently 24 or with `--ht` it will be 48.
+
+If more cores per node are requested than available, the program will print an error message and stop; however is more nodes are requested than allowed, the program will reduce the requested number of nodes to the max allowed. 
+
