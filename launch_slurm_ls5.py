@@ -81,7 +81,6 @@ def launch_slurm_ls5 (serialcmd='', script_name='', runtime='01:00:00',
     qsubfile.write('#SBATCH -t %s\n'%runtime)
     qsubfile.write('#SBATCH -n %d\n'%ncmds)
 
-
     if type(hold) is str: 
         qsubfile.write("#SBATCH -d afterok")
         qsubfile.write(":{0}".format(int(hold)))
@@ -116,8 +115,6 @@ def launch_slurm_ls5 (serialcmd='', script_name='', runtime='01:00:00',
          #qsubfile.write('cd $WORKDIR\n')
         #qsubfile.write('echo " WORKING DIR:   $WORKDIR/"\n')
         qsubfile.write('$LAUNCHER_DIR/paramrun\n')
-
-
     
         qsubfile.write('echo " "\necho " Parameteric Job Complete"\necho " "\n')
         
