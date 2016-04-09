@@ -16,13 +16,17 @@ MAXNODES=171
 
 def launch_slurm_ls5 (serialcmd='', script_name='', runtime='01:00:00',
     jobname='launch', projname='', queue='normal', email=False, qsubfile='',
-    keepqsubfile=False, ignoreuser=False, test=False, parser=[], c=[], cores_per_node=48,
+    keepqsubfile=False, ignoreuser=False, test=False, parser=[], c=[], max_cores_per_node=None,
     verbose=0, hold=[], outfile=[], cwd=[], nodes=0, use_hyperthreading=True):
 
     if use_hyperthreading:
         ncores_per_node=48
     else:
         ncores_per_node=24
+
+    if max_cores_per_node is None:
+        max_cores_per_node = ncores_per_node
+    max_cores_per_node = int(max_cores_per_node)
 
     if len(serialcmd)>0:
         print('sorry, serial mode is not currently supported')
@@ -55,6 +59,7 @@ def launch_slurm_ls5 (serialcmd='', script_name='', runtime='01:00:00',
     
         if int(nodes)>MAXNODES:
             nodes=MAXNODES
+
     else:
         print('ERROR: you must either specify a script name (using -s) or a command to run\n\n')
         sys.exit()
@@ -62,7 +67,8 @@ def launch_slurm_ls5 (serialcmd='', script_name='', runtime='01:00:00',
     if not qsubfile:
         qsubfile,qsubfilepath=mkstemp(prefix=jobname+"_",dir='.',suffix='.slurm',text=True)
         os.close(qsubfile)
-   
+
+    total_cores = max_cores_per_node*int(nodes)
 
     print('Outputting qsub commands to %s'%qsubfilepath)
     qsubfile=open(qsubfilepath,'w')
@@ -79,7 +85,7 @@ def launch_slurm_ls5 (serialcmd='', script_name='', runtime='01:00:00',
     qsubfile.write('#SBATCH -o {0}.o%j # Name of the output file (eg. myMPI.oJobID)\n'.format(jobname))
     qsubfile.write('#SBATCH -p %s\n'%queue)
     qsubfile.write('#SBATCH -t %s\n'%runtime)
-    qsubfile.write('#SBATCH -n %d\n'%ncmds)
+    qsubfile.write('#SBATCH -n %d\n'%total_cores) #ncmds)
 
     if type(hold) is str: 
         qsubfile.write("#SBATCH -d afterok")
