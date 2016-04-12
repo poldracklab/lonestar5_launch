@@ -1,5 +1,5 @@
 # lonestar5_launch
-udpates to parametric launcher on TACC/lonestar5
+updates to parametric launcher on TACC/lonestar5
 
 # behavior
 ```
