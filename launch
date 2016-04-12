@@ -32,7 +32,7 @@ parser.add_argument('-t','--test',help='do not actually launch job',dest='test',
 
 parser.add_argument('-i','--hold_jid', help='wait for this job id to complete before launching', dest='hold', default=None)
 parser.add_argument('-N','--nodes',type=int, help = 'request that a minimum number of nodes be allocated to this job', dest = 'nodes', default = None)
-parser.add_argument('-n','--max-cores-per-node', help='request that a maximum number of cores be used per node (for memorys sake)', dest = 'max_cores_per_node', default = None)
+parser.add_argument('-n','--max-cores-per-node', type=int, help='request that a maximum number of cores be used per node (for memorys sake)', dest = 'max_cores_per_node', default = None)
 
 class C(object):
     pass
