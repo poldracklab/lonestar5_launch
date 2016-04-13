@@ -1,5 +1,11 @@
 # lonestar5_launch
-udpates to parametric launcher on TACC/lonestar5
+updates to parametric launcher on TACC/lonestar5
+
+# load module
+
+      module use /corral-repl/utexas/poldracklab/users/wtriplet/external/ls5_launch
+      module load poldracklaunch
+
 
 # behavior
 ```
