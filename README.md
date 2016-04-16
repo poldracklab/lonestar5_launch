@@ -63,13 +63,13 @@ optional arguments:
 ## usage notes
 
 1. Lonestar 5's smallest allocation unit is a node (w/ 64 GB ram, 24 physical cores, 48 logical cores, no swap). So using `-N 1 -n 1` is functionally the same as `-N 1 -n 24`.
-2. `launch` doesn't free allocated any nodes until the last job finishes. If the runtimes for each launch script entry are likely to vary significantly in a predictable way, it may be worth breaking them up in an economical way.
-3. If the launch script contains a few number of tasks than there are cores, and you request a single node, you may see error messages that look like `grep: invalid max count`. This is due to an issue in the underlying parametric launcher system and (from what I can tell) is a cosmetic issue and is not causing the jobs to fail.
-4. `launch` assumes that the tasks are not threaded, and that they will use 1 core each. If any of the tasks run threaded, there's nothing stopping them from trainwrecking the core usage. Maybe the `task` commands provide a way to specify the number of threads to use, and that would help manage the resources a bit better.
+2. `launch` doesn't free allocated any nodes until the last task finishes. If the runtimes for each task are likely to vary significantly in a predictable way, it may be worth breaking them up into separate `launch` jobs.
+3. If the parallel script contains a few number of tasks than there are cores, and you request a single node, you may see error messages that look like `grep: invalid max count`. This is due to an issue in the underlying parametric launcher system and (from what I can tell) is a cosmetic issue and is not causing the tasks or job to fail.
+4. `launch` assumes that the tasks are not threaded, and that they will use 1 core each. If any of the tasks run threaded, there's nothing stopping them from trainwrecking the core usage. Maybe the commands (tasks) provide a way to specify the number of threads to use, and that would help manage the resources a bit better.
 
 ## notes on defaults
 
-if `-N` is not provided, and `-n` is, the number of nodes will be computed such that all jobs will run simultaenously. Likewise, if `-n` is not provided and `-N` is, the maximum number of cores available will be requested. This is currently 24 or with `--ht` it will be 48.
+if `-N` is not provided, and `-n` is, the number of nodes will be computed such that all tasks will run simultaenously. Likewise, if `-n` is not provided and `-N` is, the maximum number of cores available will be requested. This is currently 24 or with `--ht` it will be 48.
 
 If more cores per node are requested than available, the program will print an error message and stop; however is more nodes are requested than allowed, the program will reduce the requested number of nodes to the max allowed. 
 
