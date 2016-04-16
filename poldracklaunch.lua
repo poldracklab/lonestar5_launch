@@ -14,3 +14,6 @@ whatis("URL: http://github.com/wtriplett/lonestar5_launch")
 whatis("Description: Launcher interface for PoldrackLab")
 
 prepend_path("PATH","/corral-repl/utexas/poldracklab/users/wtriplet/external/ls5_launch")
+
+load("launcher")
+
