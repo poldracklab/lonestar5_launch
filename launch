@@ -11,7 +11,6 @@ from launch_slurm_ls5 import launch_slurm_ls5
 import socket
 
 MAXCORES=4104
-STAMPEDE = 'stampede'
 
 # set up argument parser
 
@@ -39,14 +38,15 @@ class C(object):
 
 c=C()
 
-if len(sys.argv)<2:
+if len(sys.argv) < 2:
     print
-(args, command )=parser.parse_known_args(sys.argv[1:])
 
-if len(command)>0:
-    cmd=' '.join(command)
+(args, command) = parser.parse_known_args(sys.argv[1:])
+
+if len(command) > 0:
+    cmd = ' '.join(command)
 else:
-    cmd=''
+    cmd = ''
 
 hostname = socket.gethostname()
 
@@ -56,3 +56,4 @@ launch_slurm_ls5(serialcmd=cmd, script_name=args.script_name, runtime=args.runti
                 hold=args.hold, outfile=[], cwd=[], nodes=args.nodes, max_cores_per_node=args.max_cores_per_node,
                 use_hyperthreading=args.use_hyperthreading)
 sys.exit(0)
+
